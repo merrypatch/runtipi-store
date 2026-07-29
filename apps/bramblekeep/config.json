@@ -1,0 +1,81 @@
+{
+  "$schema": "https://schemas.runtipi.io/v2/app-info.json",
+  "name": "Bramblekeep",
+  "id": "bramblekeep",
+  "available": true,
+  "port": 8390,
+  "exposable": true,
+  "dynamic_config": true,
+  "tipi_version": 1,
+  "version": "0.12.0",
+  "categories": ["utilities", "data"],
+  "short_desc": "Self-hosted single-binary workspace: pages, databases and sharing.",
+  "description": "Bramblekeep is a unified, self-hosted workspace and a free, open-source alternative to the proprietary all-in-one tools (Notion, Coda, Confluence, ClickUp) without the vendor lock-in. Rich pages over a CRDT for real-time collaboration, databases with fourteen column types and six views (table, board, calendar, gallery, chart, graph), relations, rollups and formulas, per-page sharing with public token links, and built-in documentation shipped inside the binary. Zero telemetry and no outbound network call unless you ask for one. Your whole installation is a single SQLite database plus an uploads folder that you own.",
+  "author": "MerryPatch",
+  "source": "https://github.com/merrypatch/bramblekeep",
+  "supported_architectures": ["arm64", "amd64"],
+  "uid": 10001,
+  "gid": 999,
+  "form_fields": [
+    {
+      "type": "password",
+      "label": "Setup code (optional)",
+      "env_variable": "BRAMBLEKEEP_SETUP_CODE",
+      "required": false,
+      "hint": "Whoever opens the app first creates the owner account. Set a secret here to require it on that screen, useful if the app is reachable before you sign up. Inert once the owner exists."
+    },
+    {
+      "type": "boolean",
+      "label": "Secure session cookie",
+      "env_variable": "BRAMBLEKEEP_COOKIE_SECURE",
+      "required": false,
+      "default": false,
+      "hint": "Enable when you expose the app over HTTPS (a Tipi domain or a local subdomain). Leave off for plain http access by IP, otherwise the browser drops the session cookie and you cannot sign in."
+    },
+    {
+      "type": "text",
+      "label": "SMTP host (optional)",
+      "env_variable": "BRAMBLEKEEP_SMTP_HOST",
+      "required": false,
+      "hint": "Only needed to email magic links and invitations. Without it, password sign-in works and login links are printed to the container logs."
+    },
+    {
+      "type": "number",
+      "label": "SMTP port",
+      "env_variable": "BRAMBLEKEEP_SMTP_PORT",
+      "required": false,
+      "default": 587,
+      "min": 1,
+      "max": 65535
+    },
+    {
+      "type": "text",
+      "label": "SMTP username (optional)",
+      "env_variable": "BRAMBLEKEEP_SMTP_USERNAME",
+      "required": false
+    },
+    {
+      "type": "password",
+      "label": "SMTP password (optional)",
+      "env_variable": "BRAMBLEKEEP_SMTP_PASSWORD",
+      "required": false
+    },
+    {
+      "type": "text",
+      "label": "SMTP from address (optional)",
+      "env_variable": "BRAMBLEKEEP_SMTP_FROM",
+      "required": false,
+      "placeholder": "Bramblekeep <no-reply@example.com>"
+    },
+    {
+      "type": "text",
+      "label": "Unsplash access key (optional)",
+      "env_variable": "BRAMBLEKEEP_UNSPLASH_ACCESS_KEY",
+      "required": false,
+      "hint": "Enables the cover-image picker. Public Access Key from https://unsplash.com/oauth/applications, not the Secret Key. Can also be set later in Settings by an admin."
+    }
+  ],
+  "created_at": 1785348184631,
+  "updated_at": 1785348184631,
+  "min_tipi_version": "4.5.0"
+}

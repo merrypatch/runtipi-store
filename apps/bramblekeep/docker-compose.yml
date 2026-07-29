@@ -1,0 +1,20 @@
+services:
+  bramblekeep:
+    image: 'ghcr.io/merrypatch/bramblekeep:0.12.0'
+    volumes:
+      - '${APP_DATA_DIR}/data:/data'
+    environment:
+      - 'PUBLIC_BASE_URL=${APP_PROTOCOL:-http}://${APP_DOMAIN}'
+      - 'COOKIE_SECURE=${BRAMBLEKEEP_COOKIE_SECURE:-false}'
+      - 'SETUP_CODE=${BRAMBLEKEEP_SETUP_CODE}'
+      - 'SMTP_HOST=${BRAMBLEKEEP_SMTP_HOST}'
+      - 'SMTP_PORT=${BRAMBLEKEEP_SMTP_PORT:-587}'
+      - 'SMTP_USERNAME=${BRAMBLEKEEP_SMTP_USERNAME}'
+      - 'SMTP_PASSWORD=${BRAMBLEKEEP_SMTP_PASSWORD}'
+      - 'SMTP_FROM=${BRAMBLEKEEP_SMTP_FROM:-Bramblekeep <no-reply@localhost>}'
+      - 'UNSPLASH_ACCESS_KEY=${BRAMBLEKEEP_UNSPLASH_ACCESS_KEY}'
+    x-runtipi:
+      is_main: true
+      internal_port: 8080
+x-runtipi:
+  schema_version: 2

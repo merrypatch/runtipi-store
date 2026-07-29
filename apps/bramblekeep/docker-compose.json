@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "bramblekeep",
+      "image": "ghcr.io/merrypatch/bramblekeep:0.12.0",
+      "isMain": true,
+      "internalPort": 8080,
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data",
+          "containerPath": "/data"
+        }
+      ],
+      "environment": [
+        {
+          "key": "PUBLIC_BASE_URL",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "COOKIE_SECURE",
+          "value": "${BRAMBLEKEEP_COOKIE_SECURE:-false}"
+        },
+        {
+          "key": "SETUP_CODE",
+          "value": "${BRAMBLEKEEP_SETUP_CODE}"
+        },
+        {
+          "key": "SMTP_HOST",
+          "value": "${BRAMBLEKEEP_SMTP_HOST}"
+        },
+        {
+          "key": "SMTP_PORT",
+          "value": "${BRAMBLEKEEP_SMTP_PORT:-587}"
+        },
+        {
+          "key": "SMTP_USERNAME",
+          "value": "${BRAMBLEKEEP_SMTP_USERNAME}"
+        },
+        {
+          "key": "SMTP_PASSWORD",
+          "value": "${BRAMBLEKEEP_SMTP_PASSWORD}"
+        },
+        {
+          "key": "SMTP_FROM",
+          "value": "${BRAMBLEKEEP_SMTP_FROM:-Bramblekeep <no-reply@localhost>}"
+        },
+        {
+          "key": "UNSPLASH_ACCESS_KEY",
+          "value": "${BRAMBLEKEEP_UNSPLASH_ACCESS_KEY}"
+        }
+      ]
+    }
+  ]
+}

@@ -82,3 +82,16 @@ CI: `.github/workflows/test.yml` runs `bun install && bun test` on push/PR to `m
 ## Attribution
 
 Commits and pushes for this repo are attributed to **MerryPatch** (`305806950+merrypatch@users.noreply.github.com`), matching the Bramblekeep repo. The identity is set locally in `.git/config`.
+
+## Branch protection
+
+The repo is public but owned by a personal account with a single collaborator, so outsiders can only fork and open pull requests — they never had push access. Two rulesets guard `main`, deliberately split:
+
+- **`main: history is append-only`** — blocks force-push and branch deletion, with **no bypass actors**. An admin cannot rewrite `main` either; that is the point, since the realistic threat is an accidental `--force` or a stolen token, not a stranger.
+- **`main: pull request required`** — requires a PR (0 approvals, self-merge allowed), bypassed by the repository-admin role. Direct `git push origin main` therefore still works for the owner.
+
+Splitting them matters: a single ruleset with an `always` bypass would let the admin skip *every* rule in it, force-push included.
+
+No required status check, on purpose. Pull requests opened by Renovate use `GITHUB_TOKEN`, and GitHub does not trigger workflows for those, so a required check would leave them permanently unmergeable.
+
+Both workflows declare their own `permissions:` because the repository default for `GITHUB_TOKEN` is read-only — Renovate needs `contents`, `pull-requests` and `issues` write to work at all, and the test workflow is pinned to `contents: read`.

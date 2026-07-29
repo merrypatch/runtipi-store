@@ -1,31 +1,64 @@
-# Example App Store Template
+# MerryPatch App Store for Runtipi
 
-This repository serves as a template for creating your own custom app store for the Runtipi platform. Use this as a starting point to create and share your own collection of applications.
+A custom [Runtipi](https://runtipi.io) app store publishing **[Bramblekeep](https://github.com/merrypatch/bramblekeep)** — a self-hosted, single-binary workspace and a free, open-source alternative to Notion, Coda, Confluence and ClickUp.
 
-## Repository Structure
+Add this store to your Runtipi instance and Bramblekeep installs like any other app: one click, no compose file to write, data kept in Runtipi's app-data directory and covered by its backups.
 
-- **apps/**: Contains individual app directories
+## Install Bramblekeep on Runtipi
 
-  - Each app has its own folder (e.g., `whoami/`) with the following structure:
-    - `config.json`: App configuration file
-    - `docker-compose.json`: Docker setup for the app
-    - `metadata/`: Contains app visuals and descriptions
-      - `description.md`: Markdown description of the app
-      - `logo.jpg`: App logo image
+1. In your Runtipi dashboard, go to **Settings → App Stores → Add App Store**.
+2. Paste the repository URL:
 
-- **tests/**: Contains test files for the app store
+   ```
+   https://github.com/merrypatch/runtipi-store
+   ```
 
-  - `apps.test.ts`: Test suite for validating apps
+3. Give it a name (for example `MerryPatch`) and save.
+4. Open the **App Store** tab, find **Bramblekeep**, and click **Install**.
 
-## Getting Started
+Requires Runtipi **4.5.0** or newer. The image is multi-arch (`amd64` + `arm64`, Raspberry Pi 64-bit included).
 
-This repository is intended to serve as a template for creating your own app store. Follow these steps to get started:
+Every setting is optional — install it as-is and the first visitor creates the owner account with an email and a password. To pull a newer Bramblekeep release later, click **Update App Stores** in Runtipi settings, then update the app.
 
-1. Click the "Use this template" button to create a new repository based on this template
-2. Customize the apps or add your own app folders in the `apps/` directory
-3. Test your app store by using it with Runtipi
+### Settings worth knowing about
+
+| Setting | When you need it |
+| --- | --- |
+| Setup code | The app is reachable before you get to the sign-up screen, and you want to be the one who claims it. |
+| Secure session cookie | You expose the app over **HTTPS**. Leave it off for plain `http://<ip>:8390`, or the browser drops the session cookie and sign-in silently fails. |
+| SMTP host / port / username / password / from | You want magic links and invitations emailed. Without SMTP, password sign-in works and those links are written to the container logs. |
+| Unsplash access key | You want the cover-image picker. Can also be set later in Bramblekeep's own settings. |
+
+`PUBLIC_BASE_URL` is derived automatically from the domain Runtipi assigns the app, so email links point at the right host with no configuration.
+
+## Repository structure
+
+```
+apps/
+└── bramblekeep/
+    ├── config.json           # app metadata + the form shown at install time
+    ├── docker-compose.json   # service definition Runtipi builds the real compose from
+    ├── docker-compose.yml    # same thing in compose + x-runtipi form
+    ├── data/                 # seeded into ${APP_DATA_DIR} before first start
+    └── metadata/
+        ├── description.md    # long description shown in the dashboard
+        └── logo.jpg          # square 1:1 logo
+```
+
+`apps/whoami/` is the upstream template's test app; it is harmless and useful for checking that a freshly added store works at all.
+
+## Development
+
+Runtime is [Bun](https://bun.sh).
+
+```bash
+bun install
+bun test          # validates every app against Runtipi's own schemas
+```
+
+Container image tags are kept current by Renovate (`.github/workflows/renovate.yml`, nightly), which bumps the image in both compose files and then runs `scripts/update-config.ts` to raise `tipi_version` and `version` in `config.json`.
 
 ## Documentation
 
-For detailed instructions on creating your own app store, please refer to the official guide:
-[Create Your Own App Store Guide](https://runtipi.io/docs/guides/create-your-own-app-store)
+- [Create Your Own App Store](https://runtipi.io/docs/guides/create-your-own-app-store) — the guide this store follows
+- [Bramblekeep](https://github.com/merrypatch/bramblekeep) — the app itself

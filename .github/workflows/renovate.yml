@@ -18,6 +18,16 @@ on:
 jobs:
   renovate:
     runs-on: ubuntu-latest
+
+    # The repository default for GITHUB_TOKEN is read-only, which silently
+    # leaves Renovate unable to create its branches, pull requests or the
+    # dependency dashboard issue. Granted here rather than repo-wide so the
+    # test workflow keeps the read-only default.
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4

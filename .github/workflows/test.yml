@@ -10,6 +10,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    # Validation only reads the tree. Stated explicitly so a fork's pull
+    # request cannot inherit anything wider later on.
+    permissions:
+      contents: read
+
     steps:
       - uses: actions/checkout@v4
 

@@ -4,15 +4,15 @@
 
 Rust backend (Axum + SQLite) with an embedded React frontend. No external database, no cache server, no message queue — the container is the whole installation.
 
-![Bramblekeep home page: new page, all pages, documentation and support entry points](https://raw.githubusercontent.com/merrypatch/bramblekeep/master/.github/assets/home.png)
+![Bramblekeep home page: new page, all pages, documentation and support entry points](https://raw.githubusercontent.com/merrypatch/runtipi-store/main/apps/bramblekeep/metadata/screenshots/home.png)
 
 *Home — where to go from a standing start, with your page tree in the sidebar.*
 
-![A page with a cover image and the slash menu open](https://raw.githubusercontent.com/merrypatch/bramblekeep/master/.github/assets/page.png)
+![A page with a cover image and the slash menu open](https://raw.githubusercontent.com/merrypatch/runtipi-store/main/apps/bramblekeep/metadata/screenshots/page.png)
 
 *A page — cover with the photographer's credit, emoji icon, and the `/` menu: sub-pages, inline databases, embeds, headings, lists.*
 
-![A database in table view with the new-column dialog open](https://raw.githubusercontent.com/merrypatch/bramblekeep/master/.github/assets/db.png)
+![A database in table view with the new-column dialog open](https://raw.githubusercontent.com/merrypatch/runtipi-store/main/apps/bramblekeep/metadata/screenshots/db.png)
 
 *A database — typed columns, including relation, rollup, formula and read-only metadata.*
 

@@ -4,6 +4,21 @@ A custom [Runtipi](https://runtipi.io) app store publishing **[Bramblekeep](http
 
 Add this store to your Runtipi instance and Bramblekeep installs like any other app: one click, no compose file to write, data kept in Runtipi's app-data directory and covered by its backups.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/merrypatch/bramblekeep/master/.github/assets/home.png" alt="Bramblekeep home page: new page, all pages, documentation and support entry points" width="840">
+</p>
+<p align="center"><sub>Home — where to go from a standing start, with your page tree in the sidebar.</sub></p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/merrypatch/bramblekeep/master/.github/assets/page.png" alt="A page with a cover image and the slash menu open" width="840">
+</p>
+<p align="center"><sub>A page — cover with the photographer's credit, emoji icon, and the <code>/</code> menu: sub-pages, inline databases, embeds, headings, lists.</sub></p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/merrypatch/bramblekeep/master/.github/assets/db.png" alt="A database in table view with the new-column dialog open" width="840">
+</p>
+<p align="center"><sub>A database — typed columns, including relation, rollup, formula and read-only metadata.</sub></p>
+
 ## Install Bramblekeep on Runtipi
 
 1. In your Runtipi dashboard, go to **Settings → App Stores → Add App Store**.
